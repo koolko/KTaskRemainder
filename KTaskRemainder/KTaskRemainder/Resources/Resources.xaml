@@ -1,0 +1,152 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--<Style x:Key="{x:Type ListBoxItem}"-->
+    <Style x:Key="ttStyle"
+           TargetType="ToolTip">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Grid Background="White">
+                        <Border CornerRadius="2"
+                                BorderThickness="1"
+                                BorderBrush="Blue"
+                                Margin="5"
+                                Background="White">
+                            <Label Content="{TemplateBinding Content}">
+
+                            </Label>
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="3"/>
+                            </Border.Effect>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--<Style x:Key="lbStyle"-->
+    <!--<Style x:Key="{x:Type ListBox}"
+           TargetType="{x:Type ListBox}">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+    <ControlTemplate x:Key="tmpl_1"
+                     TargetType="ListBoxItem">
+        <Border Name="ItemBorder"
+                Background="Transparent"
+                BorderBrush="Black"
+                CornerRadius="5"
+                BorderThickness="3"
+                Margin="1">
+            <ContentPresenter Margin="1" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected"
+                     Value="True">
+                <Setter TargetName="ItemBorder"
+                        Property="Background"
+                        Value="LightBlue"/>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver"
+                               Value="True"/>
+                    <Condition Property="IsSelected"
+                               Value="False"/>
+                </MultiTrigger.Conditions>
+                <!--<Setter Property="ToolTip">
+                    <Setter.Value>
+                        <ToolTip Style="{StaticResource ttStyle}"
+                                 Content="{Binding}"/>
+                    </Setter.Value>
+                </Setter>-->
+                <!--<Setter TargetName="ItemBorder"
+                        Property="Background"
+                        Value="Azure"/>
+                <Setter TargetName="ItemBorder"
+                        Property="Margin"
+                        Value="100" />-->
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="tmpl_2"
+                     TargetType="ListBoxItem">
+        <Border Name="ItemBorder"
+                Background="Red"
+                BorderBrush="Green"
+                CornerRadius="5"
+                BorderThickness="3"
+                Margin="1">
+            <ContentPresenter >
+            </ContentPresenter>
+            <!--<ContentPresenter Name="presenter"
+                              Margin="1" />-->
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsSelected"
+                     Value="True">
+                <Setter TargetName="ItemBorder"
+                        Property="Background"
+                        Value="LightBlue"/>
+            </Trigger>
+            <EventTrigger RoutedEvent="MouseEnter">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Duration="0:0:0.300" Storyboard.TargetProperty="Margin" To="0,20,0,0"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ThicknessAnimation Duration="0:0:0.300" Storyboard.TargetProperty="Margin" To="1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver"
+                               Value="True"/>
+                    <Condition Property="IsSelected"
+                               Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="ToolTip">
+                    <Setter.Value>
+                        <ToolTip Style="{StaticResource ttStyle}"
+                                 Content="{Binding ElementName=presenter, Path=Content}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="ItemBorder"
+                        Property="Background"
+                        Value="Azure"/>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--<Style x:Key="lbiStyle"-->
+    <Style x:Key="{x:Type ListBoxItem}"
+           TargetType="ListBoxItem">
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Template" Value="{StaticResource tmpl_1}"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="False">
+                <Setter Property="Template" Value="{StaticResource tmpl_2}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

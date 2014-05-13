@@ -1,0 +1,32 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:b="clr-namespace:KTaskRemainder.Behavior"
+             mc:Ignorable="d"
+             x:Class="KTaskRemainder.View.KListBox"
+             d:DesignWidth="317"
+             d:DesignHeight="230">
+    <Grid>
+        <ListBox Name="kListBox"
+                 ItemsSource="{Binding TaskWidgets}"
+                 AllowDrop="True">
+            <ListBox.ItemTemplate>
+                <ItemContainerTemplate>
+                    <StackPanel>
+                        <Label Name="lbContent"
+                               Content="{Binding TaskContent}"/>
+                        <i:Interaction.Behaviors>
+                            <b:ItemDragDropBehavior />
+                        </i:Interaction.Behaviors>
+                    </StackPanel>
+                </ItemContainerTemplate>
+            </ListBox.ItemTemplate>
+            <i:Interaction.Behaviors>
+                <b:ListBoxDragDropBehavior />
+            </i:Interaction.Behaviors>
+        </ListBox>
+    </Grid>
+</UserControl>
