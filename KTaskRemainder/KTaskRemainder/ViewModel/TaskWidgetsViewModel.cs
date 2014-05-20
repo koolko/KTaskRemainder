@@ -16,8 +16,14 @@ namespace KTaskRemainder.ViewModel
     {
         private ObservableCollection<TaskWidget> _taskWidgets;
         private TaskWidget _currentTask;
+        private string _collectionName;
 
         private CommandBase _startDragAction;
+
+        public string CollectionName
+        {
+            get { return _collectionName; }
+        }
 
         public CommandBase StartDragAction
         {
@@ -26,6 +32,7 @@ namespace KTaskRemainder.ViewModel
 
         public TaskWidgetsViewModel(string collectionName)
         {
+            _collectionName = collectionName;
             _taskWidgets = TaskWidgetManager.Instance.CreateTaskWidgetCollection(collectionName);
         }
 
@@ -47,10 +54,5 @@ namespace KTaskRemainder.ViewModel
                 this.OnNotifyPropertyChanged("CurrentTask");
             }
         }
-
-        //private _DoDragDrop()
-        //{
-        //    DragDrop.DoDragDrop(
-        //}
     }
 }

@@ -26,6 +26,31 @@ namespace KTaskRemainder.Behavior
             this.AssociatedObject.DragOver += AssociatedObject_DragOver;
             this.AssociatedObject.DragLeave += AssociatedObject_DragLeave;
             this.AssociatedObject.Drop += AssociatedObject_Drop;
+
+            this.AssociatedObject.MouseDown += AssociatedObject_MouseDown;
+        }
+
+        private void AssociatedObject_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                IDragDrop objSender = this.AssociatedObject.DataContext as IDragDrop;
+                if (objSender != null &&
+                    this.AssociatedObject.DataContext is TaskWidget)
+                {
+                    var itemWnd = new View.ItemEditWindow();
+                    ViewModel.ItemEditWindowViewModel itemEditWindowViewModel =
+                        new ViewModel.ItemEditWindowViewModel(itemWnd, (TaskWidget)this.AssociatedObject.DataContext);
+                    itemWnd.DataContext = itemEditWindowViewModel;
+
+                    string oldTxt = ((TaskWidget)this.AssociatedObject.DataContext).TaskContent;
+                    if (itemWnd.ShowDialog() != true)
+                    {
+                        ((TaskWidget)this.AssociatedObject.DataContext).TaskContent = oldTxt;
+                    }
+
+                }
+            }
         }
 
         private void AssociatedObject_DragOver(object sender, DragEventArgs e)

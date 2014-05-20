@@ -68,7 +68,11 @@
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Model\TaskWidget.cs" />
     <Compile Include="Model\TaskWidgetManager.cs" />
+    <Compile Include="ViewModel\ItemEditWindowViewModel.cs" />
     <Compile Include="ViewModel\TaskWidgetsViewModel.cs" />
+    <Compile Include="View\ItemEditWindow.xaml.cs">
+      <DependentUpon>ItemEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\KListBox.xaml.cs">
       <DependentUpon>KListBox.xaml</DependentUpon>
     </Compile>
@@ -105,6 +109,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Resources\Resources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ItemEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -14,7 +14,6 @@
                                 Margin="5"
                                 Background="White">
                             <Label Content="{TemplateBinding Content}">
-
                             </Label>
                             <Border.Effect>
                                 <DropShadowEffect ShadowDepth="3"/>
@@ -26,28 +25,14 @@
         </Setter>
     </Style>
 
-
-    <!--<Style x:Key="lbStyle"-->
-    <!--<Style x:Key="{x:Type ListBox}"
-           TargetType="{x:Type ListBox}">
-        <Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <StackPanel />
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>-->
-
     <ControlTemplate x:Key="tmpl_1"
                      TargetType="ListBoxItem">
         <Border Name="ItemBorder"
-                Background="Transparent"
-                BorderBrush="Black"
+                Background="Red"
+                BorderBrush="Green"
                 CornerRadius="5"
-                BorderThickness="3"
-                Margin="1">
-            <ContentPresenter Margin="1" />
+                BorderThickness="3">
+            <ContentPresenter />
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsSelected"
@@ -56,26 +41,6 @@
                         Property="Background"
                         Value="LightBlue"/>
             </Trigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver"
-                               Value="True"/>
-                    <Condition Property="IsSelected"
-                               Value="False"/>
-                </MultiTrigger.Conditions>
-                <!--<Setter Property="ToolTip">
-                    <Setter.Value>
-                        <ToolTip Style="{StaticResource ttStyle}"
-                                 Content="{Binding}"/>
-                    </Setter.Value>
-                </Setter>-->
-                <!--<Setter TargetName="ItemBorder"
-                        Property="Background"
-                        Value="Azure"/>
-                <Setter TargetName="ItemBorder"
-                        Property="Margin"
-                        Value="100" />-->
-            </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -85,12 +50,8 @@
                 Background="Red"
                 BorderBrush="Green"
                 CornerRadius="5"
-                BorderThickness="3"
-                Margin="1">
-            <ContentPresenter >
-            </ContentPresenter>
-            <!--<ContentPresenter Name="presenter"
-                              Margin="1" />-->
+                BorderThickness="3">
+            <ContentPresenter />
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsSelected"
@@ -99,24 +60,6 @@
                         Property="Background"
                         Value="LightBlue"/>
             </Trigger>
-            <EventTrigger RoutedEvent="MouseEnter">
-                <EventTrigger.Actions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ThicknessAnimation Duration="0:0:0.300" Storyboard.TargetProperty="Margin" To="0,20,0,0"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger.Actions>
-            </EventTrigger>
-            <EventTrigger RoutedEvent="MouseLeave">
-                <EventTrigger.Actions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ThicknessAnimation Duration="0:0:0.300" Storyboard.TargetProperty="Margin" To="1"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger.Actions>
-            </EventTrigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsMouseOver"
@@ -130,9 +73,26 @@
                                  Content="{Binding ElementName=presenter, Path=Content}" />
                     </Setter.Value>
                 </Setter>
-                <Setter TargetName="ItemBorder"
-                        Property="Background"
-                        Value="Azure"/>
+                <MultiTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="ItemBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                            To="Azure"
+                                            Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.EnterActions>
+                <MultiTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="ItemBorder"
+                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                            To="Red"
+                                            Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.ExitActions>
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -140,12 +100,27 @@
     <!--<Style x:Key="lbiStyle"-->
     <Style x:Key="{x:Type ListBoxItem}"
            TargetType="ListBoxItem">
+        <Setter Property="Margin"
+                Value="1"/>
         <Style.Triggers>
-            <Trigger Property="IsFocused" Value="True">
-                <Setter Property="Template" Value="{StaticResource tmpl_1}"/>
+            <EventTrigger RoutedEvent="MouseLeave">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <ThicknessAnimation To="1"
+                                            Duration="0:0:0.1"
+                                            Storyboard.TargetProperty="Margin"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+            <Trigger Property="IsFocused"
+                     Value="True">
+                <Setter Property="Template"
+                        Value="{StaticResource tmpl_1}"/>
             </Trigger>
-            <Trigger Property="IsFocused" Value="False">
-                <Setter Property="Template" Value="{StaticResource tmpl_2}"/>
+            <Trigger Property="IsFocused"
+                     Value="False">
+                <Setter Property="Template"
+                        Value="{StaticResource tmpl_2}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
