@@ -10,7 +10,7 @@ namespace KTaskRemainder.Common
 
         public event EventHandler CanExecuteChanged;
 
-        public CommandBase(Action<object> execute, Predicate<object> canExecute)
+        public CommandBase(Action<object> execute, Predicate<object> canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;

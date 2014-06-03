@@ -1,8 +1,16 @@
-﻿<Window x:Class="KTaskRemainder.View.ItemEditWindow"
+﻿<controls:MetroWindow x:Class="KTaskRemainder.View.ItemEditWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        Title="ItemEditWindow" Height="300" Width="300">
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:flat="http://metro.mahapps.com/winfx/xaml/shared"
+        Title="ItemEditWindow"
+        Height="300"
+        Width="300"
+        ShowInTaskbar="False"
+        ShowTitleBar="False"
+        ResizeMode="CanResizeWithGrip"
+        EnableDWMDropShadow="True">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -17,6 +25,7 @@
                  Grid.Row="0"
                  Grid.ColumnSpan="2"
                  TextWrapping="Wrap"
+                 AcceptsReturn="True"
                  Text="{Binding ItemContent}" />
         <Button Name="btnOk"
                 Content="OK"
@@ -29,4 +38,4 @@
                 Grid.Row="1"
                 Command="{Binding CloseCommandCancel}" />
     </Grid>
-</Window>
+</controls:MetroWindow>

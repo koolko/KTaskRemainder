@@ -1,6 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <BitmapImage x:Key="ImagePlus"
+                 UriSource="./plus.png" />
+    
+    <BitmapImage x:Key="ImageMinus"
+                 UriSource="./minus.png" />
+    
     <!--<Style x:Key="{x:Type ListBoxItem}"-->
     <Style x:Key="ttStyle"
            TargetType="ToolTip">
@@ -97,21 +103,13 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <!--<Style x:Key="lbiStyle"-->
-    <Style x:Key="{x:Type ListBoxItem}"
+    
+    <!--<Style x:Key="{x:Type ListBoxItem}"-->
+    <Style x:Key="lbiStyle"
            TargetType="ListBoxItem">
         <Setter Property="Margin"
                 Value="1"/>
         <Style.Triggers>
-            <EventTrigger RoutedEvent="MouseLeave">
-                <BeginStoryboard>
-                    <Storyboard>
-                        <ThicknessAnimation To="1"
-                                            Duration="0:0:0.1"
-                                            Storyboard.TargetProperty="Margin"/>
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger>
             <Trigger Property="IsFocused"
                      Value="True">
                 <Setter Property="Template"

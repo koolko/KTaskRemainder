@@ -8,7 +8,7 @@ namespace KTaskRemainder.Model
     /// <summary>
     /// Representation of single TASK content
     /// </summary>
-    public class TaskWidget : IDragDrop, INotifyPropertyChanged, IEquatable<TaskWidget>
+    public class TaskWidget : INotifyPropertyChanged, IEquatable<TaskWidget>
     {
         #region Private variables
 
@@ -84,27 +84,6 @@ namespace KTaskRemainder.Model
             get
             {
                 return TaskWidgetManager.Instance.GetTaskWidgetIndex(this);
-            }
-        }
-
-        /// <summary>
-        /// Remove object from collection
-        /// </summary>
-        public void Remove()
-        {
-            TaskWidgetManager.Instance.RemoveFromCollection(this, CollectionName);
-        }
-
-        /// <summary>
-        /// Drop object to collection
-        /// </summary>
-        /// <param name="collection">Collection in which the object should be placed</param>
-        /// <param name="index">Index location of the dropped object</param>
-        public void Drop(string collection, int index = -1)
-        {
-            if (!String.IsNullOrWhiteSpace(collection))
-            {
-                TaskWidgetManager.Instance.AddToCollection(this, collection, index);
             }
         }
 

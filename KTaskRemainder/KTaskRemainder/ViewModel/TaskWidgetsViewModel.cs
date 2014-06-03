@@ -9,6 +9,7 @@ using KTaskRemainder.Model;
 using KTaskRemainder.Common;
 using KTaskRemainder.Behavior;
 using System.Windows;
+using System.Windows.Input;
 
 namespace KTaskRemainder.ViewModel
 {
@@ -16,23 +17,38 @@ namespace KTaskRemainder.ViewModel
     {
         private ObservableCollection<TaskWidget> _taskWidgets;
         private TaskWidget _currentTask;
-        private string _collectionName;
+        private ListBoxDropHandler _listBoxDropHandler;
 
-        private CommandBase _startDragAction;
+        private ICommand _addItemCommand;
 
-        public string CollectionName
+        private ICommand _removeItemCommand;
+
+        public ICommand AddItemCommand
         {
-            get { return _collectionName; }
+            get
+            {
+                if (_addItemCommand == null)
+                {
+                    _addItemCommand = new CommandBase((o) => _taskWidgets.Add(new TaskWidget("<New Item>")));
+                }
+                return _addItemCommand;
+            }
         }
 
-        public CommandBase StartDragAction
+        public ICommand RemoveItemCommand
         {
-            get { return _startDragAction; }
+            get
+            {
+                if (_removeItemCommand == null)
+                {
+                    _removeItemCommand = new CommandBase((o) => _taskWidgets.Remove(_currentTask));
+                }
+                return _removeItemCommand;
+            }
         }
 
         public TaskWidgetsViewModel(string collectionName)
         {
-            _collectionName = collectionName;
             _taskWidgets = TaskWidgetManager.Instance.CreateTaskWidgetCollection(collectionName);
         }
 
@@ -52,6 +68,18 @@ namespace KTaskRemainder.ViewModel
             {
                 _currentTask = value;
                 this.OnNotifyPropertyChanged("CurrentTask");
+            }
+        }
+
+        public ListBoxDropHandler ListBoxDropHandler
+        {
+            get
+            {
+                if (_listBoxDropHandler == null)
+                {
+                    _listBoxDropHandler = new ListBoxDropHandler();
+                }
+                return _listBoxDropHandler;
             }
         }
     }

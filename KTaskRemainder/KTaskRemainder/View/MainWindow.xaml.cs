@@ -12,13 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using KTaskRemainder.ViewModel;
+using MahApps.Metro.Controls;
 
 namespace KTaskRemainder.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         public MainWindow()
         {
@@ -33,6 +34,12 @@ namespace KTaskRemainder.View
             _viewModelSecond.TaskWidgets.Add(new Model.TaskWidget("trzeci"));
             _viewModelSecond.TaskWidgets.Add(new Model.TaskWidget("czwarty"));
             listViewSecond.DataContext = _viewModelSecond;
+
+            TaskWidgetsViewModel _viewModelThird = new TaskWidgetsViewModel(listViewThird.Name);
+            listViewThird.DataContext = _viewModelThird;
+
+            TaskWidgetsViewModel _viewModelFourth = new TaskWidgetsViewModel(listViewFourth.Name);
+            listViewFourth.DataContext = _viewModelFourth;
         }
     }
 }

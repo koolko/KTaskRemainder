@@ -5,28 +5,56 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:b="clr-namespace:KTaskRemainder.Behavior"
+             xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
              mc:Ignorable="d"
              x:Class="KTaskRemainder.View.KListBox"
              d:DesignWidth="317"
              d:DesignHeight="230">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Button Name="btnAdd"
+                    Style="{DynamicResource MetroCircleButtonStyle}"
+                    MinHeight="30"
+                    MinWidth="30"
+                    Command="{Binding AddItemCommand}">
+                <StackPanel>
+                    <Image Source="{StaticResource ImagePlus}"
+                           Margin="8"/>
+                </StackPanel>
+            </Button>
+            <Button Name="btnRemove"
+                    Style="{DynamicResource MetroCircleButtonStyle}"
+                    MinHeight="30"
+                    MinWidth="30"
+                    Command="{Binding RemoveItemCommand}">
+                <StackPanel>
+                    <Image Source="{StaticResource ImageMinus}"
+                           Margin="8"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
         <ListBox Name="kListBox"
+                 Grid.Column="1"
                  ItemsSource="{Binding TaskWidgets}"
-                 AllowDrop="True">
+                 AllowDrop="True"
+                 dd:DragDrop.DropHandler="{Binding ListBoxDropHandler}"
+                 dd:DragDrop.IsDragSource="True"
+                 dd:DragDrop.IsDropTarget="True">
             <ListBox.ItemTemplate>
-                <ItemContainerTemplate>
+                <DataTemplate>
                     <StackPanel>
                         <Label Name="lbContent"
                                Content="{Binding TaskContent}"/>
                         <i:Interaction.Behaviors>
-                            <b:ItemDragDropBehavior />
+                            <b:ListBoxItemBehavior />
                         </i:Interaction.Behaviors>
                     </StackPanel>
-                </ItemContainerTemplate>
+                </DataTemplate>
             </ListBox.ItemTemplate>
-            <i:Interaction.Behaviors>
-                <b:ListBoxDragDropBehavior />
-            </i:Interaction.Behaviors>
         </ListBox>
     </Grid>
 </UserControl>
