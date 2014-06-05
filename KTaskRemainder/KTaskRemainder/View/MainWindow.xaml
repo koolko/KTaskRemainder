@@ -7,8 +7,9 @@
         EnableDWMDropShadow="True"
         ResizeMode="CanResizeWithGrip"
         Title="K Task Remainder"
-        Height="553"
-        Width="601">
+        Height="493"
+        Width="708"
+        Icon="{StaticResource ImageIcon}">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

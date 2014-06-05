@@ -6,7 +6,10 @@
     
     <BitmapImage x:Key="ImageMinus"
                  UriSource="./minus.png" />
-    
+
+    <BitmapImage x:Key="ImageIcon"
+                 UriSource="./icon.ico" />
+
     <!--<Style x:Key="{x:Type ListBoxItem}"-->
     <Style x:Key="ttStyle"
            TargetType="ToolTip">
