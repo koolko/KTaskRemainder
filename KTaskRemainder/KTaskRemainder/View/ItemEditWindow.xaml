@@ -10,7 +10,8 @@
         ShowInTaskbar="False"
         ShowTitleBar="False"
         ResizeMode="CanResizeWithGrip"
-        EnableDWMDropShadow="True">
+        EnableDWMDropShadow="True"
+        Topmost="True">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

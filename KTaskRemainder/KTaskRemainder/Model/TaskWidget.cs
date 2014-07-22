@@ -12,7 +12,11 @@ namespace KTaskRemainder.Model
     {
         #region Private variables
 
+        /// <summary>
+        /// Task unique guid
+        /// </summary>
         private Guid _taskGuid = Guid.Empty;
+
         private string _collectionName = null;
         private string _taskContent = String.Empty;
         private ETaskPriority _taskPriority = ETaskPriority.Middle;
@@ -55,9 +59,18 @@ namespace KTaskRemainder.Model
         /// Constructor of the 'TaskWidget' class
         /// </summary>
         /// <param name="content">Content of the task item</param>
-        public TaskWidget(string content)
+        public TaskWidget(string content) :
+            this(content, Guid.NewGuid())
+        { }
+
+        /// <summary>
+        /// Constructor of the 'TaskWidget' class
+        /// </summary>
+        /// <param name="content">Content of the task item</param>
+        /// <param name="guid">Task unique guid</param>
+        public TaskWidget(string content, Guid guid)
         {
-            _taskGuid = Guid.NewGuid();
+            _taskGuid = guid;
             TaskContent = content;
         }
 

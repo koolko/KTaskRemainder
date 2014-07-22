@@ -25,21 +25,27 @@ namespace KTaskRemainder.View
         {
             InitializeComponent();
 
-            TaskWidgetsViewModel _viewModelFirst = new TaskWidgetsViewModel(listViewFirst.Name);
-            _viewModelFirst.TaskWidgets.Add(new Model.TaskWidget("pierwszy"));
-            _viewModelFirst.TaskWidgets.Add(new Model.TaskWidget("drugi"));
-            listViewFirst.DataContext = _viewModelFirst;
+            MainPage page = new MainPage();
+            mainFrame.Navigate(page);
 
-            TaskWidgetsViewModel _viewModelSecond = new TaskWidgetsViewModel(listViewSecond.Name);
-            _viewModelSecond.TaskWidgets.Add(new Model.TaskWidget("trzeci"));
-            _viewModelSecond.TaskWidgets.Add(new Model.TaskWidget("czwarty"));
-            listViewSecond.DataContext = _viewModelSecond;
+            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(page);
+            this.DataContext = mainWindowViewModel;
 
-            TaskWidgetsViewModel _viewModelThird = new TaskWidgetsViewModel(listViewThird.Name);
-            listViewThird.DataContext = _viewModelThird;
+            //TaskWidgetsViewModel _viewModelFirst = new TaskWidgetsViewModel(listViewFirst.Name);
+            //_viewModelFirst.TaskWidgets.Add(new Model.TaskWidget("pierwszy"));
+            //_viewModelFirst.TaskWidgets.Add(new Model.TaskWidget("drugi"));
+            //listViewFirst.DataContext = _viewModelFirst;
 
-            TaskWidgetsViewModel _viewModelFourth = new TaskWidgetsViewModel(listViewFourth.Name);
-            listViewFourth.DataContext = _viewModelFourth;
+            //TaskWidgetsViewModel _viewModelSecond = new TaskWidgetsViewModel(listViewSecond.Name);
+            //_viewModelSecond.TaskWidgets.Add(new Model.TaskWidget("trzeci"));
+            //_viewModelSecond.TaskWidgets.Add(new Model.TaskWidget("czwarty"));
+            //listViewSecond.DataContext = _viewModelSecond;
+
+            //TaskWidgetsViewModel _viewModelThird = new TaskWidgetsViewModel(listViewThird.Name);
+            //listViewThird.DataContext = _viewModelThird;
+
+            //TaskWidgetsViewModel _viewModelFourth = new TaskWidgetsViewModel(listViewFourth.Name);
+            //listViewFourth.DataContext = _viewModelFourth;
         }
     }
 }

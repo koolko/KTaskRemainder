@@ -12,7 +12,7 @@ namespace KTaskRemainder.ViewModel
         private ItemEditWindow _window;
 
         private ICommand _closeCommandOk;
-        private ICommand _closeCommandConcel;
+        private ICommand _closeCommandCancel;
 
         public ICommand CloseCommandOk
         {
@@ -30,11 +30,11 @@ namespace KTaskRemainder.ViewModel
         {
             get
             {
-                if (_closeCommandConcel == null)
+                if (_closeCommandCancel == null)
                 {
-                    _closeCommandConcel = new CommandBase((o) => { _window.DialogResult = false; _window.Close(); }, null);
+                    _closeCommandCancel = new CommandBase((o) => { _window.DialogResult = false; _window.Close(); }, null);
                 }
-                return _closeCommandConcel;
+                return _closeCommandCancel;
             }
         }
 

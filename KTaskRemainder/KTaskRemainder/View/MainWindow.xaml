@@ -10,6 +10,13 @@
         Height="493"
         Width="708"
         Icon="{StaticResource ImageIcon}">
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Name="btnSettings"
+                    Content="settings"
+                    Command="{Binding SettingsCommand}"/>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -18,71 +25,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <GridSplitter Grid.Column="2"
-                      Grid.Row="1"
-                      Grid.RowSpan="3"
-                      Width="3"
-                      ResizeDirection="Columns"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"/>
-        <GridSplitter Grid.Column="1"
-                      Grid.Row="2"
-                      Grid.ColumnSpan="3"
-                      Height="3"
-                      ResizeDirection="Rows"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"/>
-        <Label Grid.Column="1"
-               Grid.Row="0"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Content="WAŻNE" />
-        <Label Grid.Column="3"
-               Grid.Row="0"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Content="NIE WAŻNE" />
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Content="PILNE">
-            <Label.LayoutTransform>
-                <RotateTransform Angle="-90"/>
-            </Label.LayoutTransform>
-        </Label>
-        <Label Grid.Column="0"
-               Grid.Row="3"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"
-               Content="NIE PILNE">
-            <Label.LayoutTransform>
-                <RotateTransform Angle="-90"/>
-            </Label.LayoutTransform>
-        </Label>
-        <view:KListBox x:Name="listViewFirst"
-                       Grid.Column="1"
-                       Grid.Row="1" />
-        <view:KListBox x:Name="listViewSecond"
-                       Grid.Column="3"
-                       Grid.Row="1" />
-        <view:KListBox x:Name="listViewThird"
-                       Grid.Column="1"
-                       Grid.Row="3" />
-        <view:KListBox x:Name="listViewFourth"
-                       Grid.Column="3"
-                       Grid.Row="3" />
+        <Frame Name="mainFrame"
+               NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </controls:MetroWindow>

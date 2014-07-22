@@ -46,6 +46,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Packages\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.0.13.1.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
@@ -77,9 +80,15 @@
     <Compile Include="Common\CommandBase.cs" />
     <Compile Include="Common\TaskPriority.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
+    <Compile Include="Database\DbCommon.cs" />
+    <Compile Include="Database\DbManager.cs" />
+    <Compile Include="Database\DbSqlite.cs" />
+    <Compile Include="Database\IDatabase.cs" />
     <Compile Include="Model\TaskWidget.cs" />
     <Compile Include="Model\TaskWidgetManager.cs" />
     <Compile Include="ViewModel\ItemEditWindowViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModel\TaskWidgetsViewModel.cs" />
     <Compile Include="View\ItemEditWindow.xaml.cs">
       <DependentUpon>ItemEditWindow.xaml</DependentUpon>
@@ -87,8 +96,14 @@
     <Compile Include="View\KListBox.xaml.cs">
       <DependentUpon>KListBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -133,7 +148,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
