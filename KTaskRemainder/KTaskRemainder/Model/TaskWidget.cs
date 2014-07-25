@@ -17,6 +17,8 @@ namespace KTaskRemainder.Model
         /// </summary>
         private Guid _taskGuid = Guid.Empty;
 
+        private bool _important, _urgent;
+
         private string _collectionName = null;
         private string _taskContent = String.Empty;
         private ETaskPriority _taskPriority = ETaskPriority.Middle;
@@ -51,6 +53,30 @@ namespace KTaskRemainder.Model
             }
         }
 
+        /// <summary>
+        /// Gets task unique guid
+        /// </summary>
+        public Guid TaskGuid
+        {
+            get { return _taskGuid; }
+        }
+
+        /// <summary>
+        /// Gets task importance information
+        /// </summary>
+        public bool Important
+        {
+            get { return _important; }
+        }
+
+        /// <summary>
+        /// Get task grgency information
+        /// </summary>
+        public bool Urgent
+        {
+            get { return _urgent; }
+        }
+
         #endregion
 
         #region Constructor
@@ -59,16 +85,20 @@ namespace KTaskRemainder.Model
         /// Constructor of the 'TaskWidget' class
         /// </summary>
         /// <param name="content">Content of the task item</param>
-        public TaskWidget(string content) :
-            this(content, Guid.NewGuid())
+        /// <param name="important">If task is important</param>
+        /// <param name="urgent">If task is urgent</param>
+        public TaskWidget(string content, bool important, bool urgent) :
+            this(content, important, urgent, Guid.NewGuid())
         { }
 
         /// <summary>
         /// Constructor of the 'TaskWidget' class
         /// </summary>
         /// <param name="content">Content of the task item</param>
+        /// <param name="content">Content of the task item</param>
+        /// <param name="important">If task is important</param>
         /// <param name="guid">Task unique guid</param>
-        public TaskWidget(string content, Guid guid)
+        public TaskWidget(string content, bool important, bool urgent, Guid guid)
         {
             _taskGuid = guid;
             TaskContent = content;

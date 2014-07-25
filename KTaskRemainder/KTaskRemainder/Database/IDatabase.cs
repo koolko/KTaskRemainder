@@ -11,25 +11,35 @@ namespace KTaskRemainder.Database
     interface IDatabase
     {
         /// <summary>
-        /// Create new database
+        /// Set database name
         /// </summary>
         /// <param name="name">Database name</param>
         /// <returns>Returns 'true' if operation was successful</returns>
-        bool CreateDb(string name);
+        bool SetDbName(string name);
 
         /// <summary>
-        /// Delete database
+        /// Create new database
         /// </summary>
-        /// <param name="name">Database name</param>
         /// <returns>Returns 'true' if operation was successful</returns>
-        bool DeleteDb(string name);
+        bool CreateDb();
+
+        /// <summary>
+        /// Delete existing database
+        /// </summary>
+        /// <returns>Returns 'true' if operation was successful</returns>
+        bool DeleteDb();
 
         /// <summary>
         /// Open database
         /// </summary>
-        /// <param name="name">Database name</param>
         /// <returns>Returns 'true' if operation was successful</returns>
-        bool OpenDb(string name);
+        bool OpenDb();
+
+        /// <summary>
+        /// Close database
+        /// </summary>
+        /// <returns>Returns 'true' if operation was successful</returns>
+        bool CloseDb();
 
         /// <summary>
         /// Add record to database
@@ -57,5 +67,22 @@ namespace KTaskRemainder.Database
         /// <param name="urgent">If task is urgent (null -> without change)</param>
         /// <returns>Returns 'true' if operation was successful</returns>
         bool Update(System.Guid guid, string task = null, bool? important = null, bool? urgent = null);
+
+        /// <summary>
+        /// Get all tasks from database
+        /// </summary>
+        /// <param name="tasks">Return result</param>
+        /// <param name="important">If tasks are important</param>
+        /// <param name="urgent">If tasks are urgent</param>
+        /// <returns>Returns 'true' if operation was successful</returns>
+        bool GetAllTasks(out List<DbCommon.Task> tasks, bool? important = null, bool? urgent = null);
+
+        /// <summary>
+        /// Get task from database
+        /// </summary>
+        /// <param name="task">Return result</param>
+        /// <param name="guid">Task unique guid</param>
+        /// <returns>Returns 'true' if operation was successful</returns>
+        bool GetTask(out DbCommon.Task task, Guid guid);
     }
 }

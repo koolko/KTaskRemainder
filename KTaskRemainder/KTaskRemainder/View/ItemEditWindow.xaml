@@ -32,11 +32,13 @@
                 Content="OK"
                 Grid.Column="0"
                 Grid.Row="1"
-                Command="{Binding CloseCommandOk}" />
+                Command="{Binding CloseCommandOk}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
         <Button Name="btnCancel"
                 Content="CANCEL"
                 Grid.Column="1"
                 Grid.Row="1"
-                Command="{Binding CloseCommandCancel}" />
+                Command="{Binding CloseCommandCancel}"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
     </Grid>
 </controls:MetroWindow>

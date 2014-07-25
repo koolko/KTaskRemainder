@@ -28,20 +28,30 @@ namespace KTaskRemainder.Behavior
                 {
                     var itemWnd = new View.ItemEditWindow();
                     ViewModel.ItemEditWindowViewModel itemEditWindowViewModel =
-                        new ViewModel.ItemEditWindowViewModel(itemWnd, (TaskWidget)this.AssociatedObject.DataContext);
+                        new ViewModel.ItemEditWindowViewModel((TaskWidget)this.AssociatedObject.DataContext);
                     itemWnd.DataContext = itemEditWindowViewModel;
 
-                    string oldTxt = ((TaskWidget)this.AssociatedObject.DataContext).TaskContent;
-                    if (itemWnd.ShowDialog() != true)
+                    TaskWidget taskWidget = (TaskWidget)this.AssociatedObject.DataContext;
+
+                    if (taskWidget != null)
                     {
-                        ((TaskWidget)this.AssociatedObject.DataContext).TaskContent = oldTxt;
+                        string oldTxt = taskWidget.TaskContent;
+                        if (itemWnd.ShowDialog() != true)
+                        {
+                            taskWidget.TaskContent = oldTxt;
+                        }
+                        else
+                        {
+                            //Database.DbManager.Add(taskWidget.TaskGuid, taskWidget.TaskContent);
+                        }
                     }
                 }
                 else
                 {
                     DependencyObject parent = this.AssociatedObject;
                     bool ok = false;
-                    while (!ok && parent != null)
+                    while (!ok &&
+                           parent != null)
                     {
                         parent = VisualTreeHelper.GetParent(parent);
                         if (parent is ListBox)

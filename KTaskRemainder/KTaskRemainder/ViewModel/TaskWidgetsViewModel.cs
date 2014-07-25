@@ -29,7 +29,16 @@ namespace KTaskRemainder.ViewModel
             {
                 if (_addItemCommand == null)
                 {
-                    _addItemCommand = new CommandBase((o) => _taskWidgets.Add(new TaskWidget("<New Item>")));
+                    _addItemCommand = new CommandBase((o) =>
+                    {
+                        if (o is System.Windows.Controls.UserControl)
+                        {
+                            System.Windows.Controls.UserControl uc = (System.Windows.Controls.UserControl)o;
+                            bool important = ((string)uc.Tag == "1" || (string)uc.Tag == "3");
+                            bool urgent = ((string)uc.Tag == "2" || (string)uc.Tag == "4");
+                            _taskWidgets.Add(new TaskWidget("<New Item>", important, urgent));
+                        }
+                    });
                 }
                 return _addItemCommand;
             }

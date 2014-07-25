@@ -20,7 +20,8 @@
                     Style="{DynamicResource MetroCircleButtonStyle}"
                     MinHeight="30"
                     MinWidth="30"
-                    Command="{Binding AddItemCommand}">
+                    Command="{Binding AddItemCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
                 <StackPanel>
                     <Image Source="{StaticResource ImagePlus}"
                            Margin="8"/>

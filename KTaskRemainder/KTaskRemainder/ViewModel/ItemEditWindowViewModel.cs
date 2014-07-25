@@ -9,7 +9,6 @@ namespace KTaskRemainder.ViewModel
     public class ItemEditWindowViewModel : ViewModelBase
     {
         private TaskWidget _taskWidget;
-        private ItemEditWindow _window;
 
         private ICommand _closeCommandOk;
         private ICommand _closeCommandCancel;
@@ -20,7 +19,7 @@ namespace KTaskRemainder.ViewModel
             {
                 if (_closeCommandOk == null)
                 {
-                    _closeCommandOk = new CommandBase((o) => { _window.DialogResult = true; _window.Close(); }, null);
+                    _closeCommandOk = new CommandBase((o) => { if (o is System.Windows.Window) { ((System.Windows.Window)o).DialogResult = true; ((System.Windows.Window)o).Close(); } }, null);
                 }
                 return _closeCommandOk;
             }
@@ -32,15 +31,14 @@ namespace KTaskRemainder.ViewModel
             {
                 if (_closeCommandCancel == null)
                 {
-                    _closeCommandCancel = new CommandBase((o) => { _window.DialogResult = false; _window.Close(); }, null);
+                    _closeCommandCancel = new CommandBase((o) => { if (o is System.Windows.Window) { ((System.Windows.Window)o).DialogResult = false; ((System.Windows.Window)o).Close(); } }, null);
                 }
                 return _closeCommandCancel;
             }
         }
 
-        public ItemEditWindowViewModel(ItemEditWindow window, TaskWidget taskWidget)
+        public ItemEditWindowViewModel(TaskWidget taskWidget)
         {
-            _window = window;
             _taskWidget = taskWidget;
         }
 
