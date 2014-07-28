@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using KTaskRemainder.Common;
 using KTaskRemainder.Behavior;
+using KTaskRemainder.Database;
 
 namespace KTaskRemainder.Model
 {
@@ -17,10 +18,19 @@ namespace KTaskRemainder.Model
         /// </summary>
         private Guid _taskGuid = Guid.Empty;
 
+        /// <summary>
+        /// Importance and urgency information
+        /// </summary>
         private bool _important, _urgent;
 
-        private string _collectionName = null;
+        /// <summary>
+        /// Task content
+        /// </summary>
         private string _taskContent = String.Empty;
+
+        /// <summary>
+        /// Task priority
+        /// </summary>
         private ETaskPriority _taskPriority = ETaskPriority.Middle;
 
         #endregion
@@ -28,7 +38,7 @@ namespace KTaskRemainder.Model
         #region Properties
 
         /// <summary>
-        /// Gets or sets the task priority
+        /// Gets or sets the task priority (not implemented)
         /// </summary>
         public ETaskPriority TaskPriority
         {
@@ -49,6 +59,11 @@ namespace KTaskRemainder.Model
             set
             {
                 _taskContent = value;
+                if (_taskGuid != null &&
+                    _taskGuid != Guid.Empty)
+                {
+                    DbManager.Update(_taskGuid, value, null, null);
+                }
                 this.OnNotifyPropertyChanged("TaskContent");
             }
         }
@@ -67,6 +82,15 @@ namespace KTaskRemainder.Model
         public bool Important
         {
             get { return _important; }
+            set
+            {
+                _important = value;
+                if (_taskGuid != null &&
+                    _taskGuid != Guid.Empty)
+                {
+                    DbManager.Update(_taskGuid, null, value, null);
+                }
+            }
         }
 
         /// <summary>
@@ -75,6 +99,15 @@ namespace KTaskRemainder.Model
         public bool Urgent
         {
             get { return _urgent; }
+            set
+            {
+                _urgent = value;
+                if (_taskGuid != null &&
+                    _taskGuid != Guid.Empty)
+                {
+                    DbManager.Update(_taskGuid, null, null, value);
+                }
+            }
         }
 
         #endregion
@@ -100,10 +133,12 @@ namespace KTaskRemainder.Model
         /// <param name="guid">Task unique guid</param>
         public TaskWidget(string content, bool important, bool urgent, Guid guid)
         {
-            _taskGuid = guid;
             TaskContent = content;
+            _important = important;
+            _urgent = urgent;
+            _taskGuid = guid;
         }
-
+        
         #endregion
 
         #region IDragDrop implementation

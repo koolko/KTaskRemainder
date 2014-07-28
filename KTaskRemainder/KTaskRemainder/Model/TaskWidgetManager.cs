@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KTaskRemainder.Database;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace KTaskRemainder.Model
 {
+    /// <summary>
+    /// Manager of the 'TaskWidget' items
+    /// </summary>
     public class TaskWidgetManager
     {
         /// <summary>
@@ -19,6 +23,9 @@ namespace KTaskRemainder.Model
         /// </summary>
         private Dictionary<string, ObservableCollection<TaskWidget>> _taskWidgetCollections;
 
+        /// <summary>
+        /// 'TaskWidgetManager' constructor
+        /// </summary>
         private TaskWidgetManager()
         {
             _taskWidgetCollections = new Dictionary<string, ObservableCollection<TaskWidget>>();
@@ -69,6 +76,12 @@ namespace KTaskRemainder.Model
             return null;
         }
 
+        /// <summary>
+        /// Remove 'TaskWidget' object from 'TaskWidget' collection
+        /// </summary>
+        /// <param name="widget">'TaskWidget' object</param>
+        /// <param name="collectionName">'TaskWidget' collection</param>
+        /// <returns>Return 'true' if the object removel was succesfull</returns>
         public bool RemoveFromCollection(TaskWidget widget, string collectionName = null)
         {
             if (widget != null)
@@ -83,12 +96,20 @@ namespace KTaskRemainder.Model
                     if (collectionName != null)
                     {
                         collection.Remove(widget);
+                        return true;
                     }
                 }
             }
             return false;
         }
 
+        /// <summary>
+        /// Add 'TaskWidget' object to 'TaskWidget' collection
+        /// </summary>
+        /// <param name="widget">'TaskWidget' object</param>
+        /// <param name="collectionName">'TaskWidget' collection</param>
+        /// <param name="index">Index of the 'TaskWidget' object</param>
+        /// <returns>Return 'true' if the object addition was succesfull</returns>
         public bool AddToCollection(TaskWidget widget, string collectionName, int index = 0)
         {
             if (widget != null &&
@@ -111,6 +132,11 @@ namespace KTaskRemainder.Model
             return false;
         }
 
+        /// <summary>
+        /// Find collection name based on 'TaskWidget' object
+        /// </summary>
+        /// <param name="widget">'TaskWidget' object</param>
+        /// <returns>Returns collection name (null if collection name doesn't exist)</returns>
         public string FindCollectionName(TaskWidget widget)
         {
             Dictionary<string, ObservableCollection<TaskWidget>>.Enumerator e = _taskWidgetCollections.GetEnumerator();
@@ -124,12 +150,20 @@ namespace KTaskRemainder.Model
             return null;
         }
 
+        /// <summary>
+        /// Find item index based on 'TaskWidget' object
+        /// </summary>
+        /// <param name="widget">'TaskWidget' object</param>
+        /// <returns>Returns item index (-1 if 'TaskWidget' object exist and belongs to collection)</returns>
         public int GetTaskWidgetIndex(TaskWidget widget)
         {
-            ObservableCollection<TaskWidget> collection = this.GetTaskWidgetCollection(widget.CollectionName);
-            if (collection != null)
+            if (widget != null)
             {
-                return collection.IndexOf(widget);
+                ObservableCollection<TaskWidget> collection = this.GetTaskWidgetCollection(widget.CollectionName);
+                if (collection != null)
+                {
+                    return collection.IndexOf(widget);
+                }
             }
             return -1;
         }

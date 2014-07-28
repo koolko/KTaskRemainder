@@ -62,7 +62,7 @@ namespace KTaskRemainder.Database
         /// Update database record
         /// </summary>
         /// <param name="guid">Task unique guid</param>
-        /// <param name="task">Task content</param>
+        /// <param name="task">Task content (null -> without change)</param>
         /// <param name="important">If task is important (null -> without change)</param>
         /// <param name="urgent">If task is urgent (null -> without change)</param>
         /// <returns>Returns 'true' if operation was successful</returns>

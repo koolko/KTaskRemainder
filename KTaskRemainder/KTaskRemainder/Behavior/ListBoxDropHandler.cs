@@ -30,6 +30,27 @@ namespace KTaskRemainder.Behavior
                         collection.Remove(tw);
                     }
                 }
+                Console.WriteLine(((System.Windows.Controls.ListBox)dropInfo.VisualTarget).Tag);
+
+                System.Windows.DependencyObject parent = dropInfo.VisualTarget;
+                bool ok = false;
+                while (!ok &&
+                        parent != null)
+                {
+                    parent = System.Windows.Media.VisualTreeHelper.GetParent(parent);
+                    if (parent is System.Windows.Controls.UserControl)
+                    {
+                        ok = true;
+                    }
+                }
+                if (ok)
+                {
+                    bool important = ((string)((System.Windows.Controls.UserControl)parent).Tag == "1" || (string)((System.Windows.Controls.UserControl)parent).Tag == "3");
+                    bool urgent = ((string)((System.Windows.Controls.UserControl)parent).Tag == "1" || (string)((System.Windows.Controls.UserControl)parent).Tag == "2");
+
+                    tw.Important = important;
+                    tw.Urgent = urgent;
+                }
             }
         }
     }

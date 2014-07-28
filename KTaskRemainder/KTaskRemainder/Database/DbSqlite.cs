@@ -11,7 +11,14 @@ namespace KTaskRemainder.Database
     /// </summary>
     public class DbSqlite : IDatabase
     {
+        /// <summary>
+        /// SQLite connection
+        /// </summary>
         private SQLiteConnection _dbConnection;
+
+        /// <summary>
+        /// Database name
+        /// </summary>
         private string _name;
 
         /// <summary>
@@ -190,7 +197,6 @@ namespace KTaskRemainder.Database
         public bool Update(Guid guid, string task = null, bool? important = null, bool? urgent = null)
         {
             bool result = false;
-            task = null;
             System.Data.DataTable dt = new System.Data.DataTable();
             try
             {
@@ -322,6 +328,12 @@ namespace KTaskRemainder.Database
             return result;
         }
 
+        /// <summary>
+        /// Get task from database
+        /// </summary>
+        /// <param name="task">Return result</param>
+        /// <param name="guid">Task unique guid</param>
+        /// <returns>Returns 'true' if operation was successful</returns>
         public bool GetTask(out DbCommon.Task task, Guid guid)
         {
             bool result = false;
@@ -364,6 +376,12 @@ namespace KTaskRemainder.Database
             return result;
         }
 
+        /// <summary>
+        /// Execution of the query
+        /// </summary>
+        /// <param name="rowsUpdated">Amount of rows updated</param>
+        /// <param name="sql">SQL query</param>
+        /// <returns>Returns 'true' if operation was successful</returns>
         private bool _ExecuteNonQuery(out int rowsUpdated, string sql)
         {
             bool result = false;

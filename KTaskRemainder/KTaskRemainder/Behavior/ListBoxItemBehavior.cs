@@ -35,15 +35,7 @@ namespace KTaskRemainder.Behavior
 
                     if (taskWidget != null)
                     {
-                        string oldTxt = taskWidget.TaskContent;
-                        if (itemWnd.ShowDialog() != true)
-                        {
-                            taskWidget.TaskContent = oldTxt;
-                        }
-                        else
-                        {
-                            //Database.DbManager.Add(taskWidget.TaskGuid, taskWidget.TaskContent);
-                        }
+                        itemWnd.ShowDialog();
                     }
                 }
                 else
