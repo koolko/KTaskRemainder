@@ -6,7 +6,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         EnableDWMDropShadow="True"
         ResizeMode="CanResizeWithGrip"
-        Title="K Task Remainder"
+        Title="K Task Reminder"
         Height="493"
         Width="708"
         Icon="{StaticResource ImageIcon}">
@@ -14,7 +14,8 @@
         <controls:WindowCommands>
             <Button Name="btnSettings"
                     Content="settings"
-                    Command="{Binding SettingsCommand}"/>
+                    Command="{Binding SettingsCommand}"
+                    Visibility="Hidden"/>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     <Window.Resources>

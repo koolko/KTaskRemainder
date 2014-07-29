@@ -23,7 +23,10 @@ namespace KTaskRemainder.Database
         static DbManager()
         {
             _db = new DbSqlite();
-            if (!_db.SetDbName(_DB_DEFAULT_NAME) ||
+            System.IO.FileInfo fileInfo = new System.IO.FileInfo(_DB_DEFAULT_NAME);
+            if (!fileInfo.Exists ||
+                fileInfo.Length == 0 ||
+                !_db.SetDbName(_DB_DEFAULT_NAME) ||
                 !_db.OpenDb())                          // if db doesn't exists
             {
                 DbManager.CreateDB(_DB_DEFAULT_NAME);   // create new one

@@ -150,8 +150,12 @@ namespace KTaskRemainder.ViewModel
         /// </summary>
         private void _taskWidgetRemove()
         {
-            DbManager.Remove(_currentTask.TaskGuid);
-            _taskWidgets.Remove(_currentTask);
+            try
+            {
+                DbManager.Remove(_currentTask.TaskGuid);
+                _taskWidgets.Remove(_currentTask);
+            }
+            catch { }
         }
     }
 }
